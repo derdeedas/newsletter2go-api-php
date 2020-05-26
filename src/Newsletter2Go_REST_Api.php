@@ -491,6 +491,28 @@ class Newsletter2Go_REST_Api
         return $this->curl($endpoint, $data, static::METHOD_POST);
         
     }
+    
+    /**
+     * addRecipientsSegment
+     * https://docs.newsletter2go.com/?version=latest#e2b73d08-b635-4028-8397-9687f32e2be2
+     * @param string $listId
+     * @param string $segmentId
+     * @param string $filter
+     * @return \stdClass
+     *
+     * @throws \Exception
+     */
+    public function addRecipientsSegment($listId, $segmentId, $filter)
+    {
+        isset($filter) ? $endpoint = "/lists/$listId/groups/$segmentId/recipients?_filter=" . $filter : $endpoint = "/lists/$listId/groups/$segmentId/recipients";
+        
+        $data = array(
+            "_expand" => true
+        );
+        
+        return $this->curl($endpoint, $data, static::METHOD_POST);
+        
+    }
 
     /**
      * deleteRecipientsSegment
